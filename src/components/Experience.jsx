@@ -13,9 +13,9 @@ const Experience = () => {
       location: "",
       logo: "/sarkkis_robotics_lda_logo.jpeg",
       description: [
-        "Developed enterprise-grade .NET/WPF applications, applying advanced design patterns to ensure long-term system scalability",
-        "Reduced technical debt and simulation errors by 85% through the strategic implementation of a custom 3D CAD visualization module",
-        "Collaborated within a cross-functional international environment (Canada/Europe) to deliver robotics software for global manufacturing leaders",
+        "Developed enterprise-grade .NET/WPF applications using advanced design patterns",
+        "Reduced technical debt and simulation errors by 85% through a custom 3D CAD visualization module",
+        "Collaborated with international teams (Canada & Europe) on industrial robotics solutions",
       ],
       color: "#cf0f13",
     },
@@ -26,10 +26,10 @@ const Experience = () => {
       location: "",
       logo: "/glintt_logo.jpeg",
       description: [
-        "Developed scalable web applications using ReactJS and Micro Frontends",
-        "Integrated .NET APIs with Apollo GraphQL for efficient data fetching and performance",
-        "Wrote clean, testable code maintaining +90% test coverage using Jest and React Testing Library",
-        "Delivered digital solutions for hospitals and pharmacies in an Agile (SCRUM) environment",
+        "Built scalable frontend applications using ReactJS and Micro Frontend architectures",
+        "Integrated .NET APIs with Apollo GraphQL, improving data-fetching performance",
+        "Maintained 90%+ test coverage using Jest and React Testing Library",
+        "Delivered mission-critical digital solutions for hospitals in Portugal and Spain",
       ],
       color: "#01e4d1",
     },
@@ -45,7 +45,7 @@ const Experience = () => {
         "Implement runtime data validation with Zod to ensure data consistency and reliability",
         "Work in an Agile (SCRUM) environment within the public healthcare sector (SPMS - Portal Inovar)",
       ],
-      color: "#0158ab",
+      color: "#2790f5",
     },
   ];
 
@@ -142,7 +142,7 @@ const Experience = () => {
                             </h3>
                             <p
                               className="text-base font-semibold"
-                              style={getGradientStyle(exp.color, "to-r")}>
+                              style={{ color: exp.color }}>
                               {exp.company}
                             </p>
                           </div>
@@ -305,7 +305,7 @@ const Experience = () => {
                           </h3>
                           <p
                             className="text-sm sm:text-lg font-semibold"
-                            style={getGradientStyle(exp.color, "to-r")}>
+                            style={{ color: exp.color }}>
                             {exp.company}
                           </p>
                         </div>

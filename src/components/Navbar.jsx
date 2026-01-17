@@ -54,6 +54,11 @@ const Navbar = () => {
                 className="text-github-text-secondary hover:text-github-text transition-colors">
                 Skills
               </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-github-text-secondary hover:text-github-text transition-colors">
+                Contact
+              </button>
             </div>
           </div>
         </div>

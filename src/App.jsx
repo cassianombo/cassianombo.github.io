@@ -1,4 +1,5 @@
 import About from "./components/About";
+import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -17,14 +18,12 @@ function App() {
         <Projects />
         <SectionDivider flip />
         <Experience />
-        <SectionDivider />
         <Skills />
+        <Contact />
       </main>
 
       <footer className="bg-github-bg text-github-text-secondary py-8 text-center border-t border-github-border">
-        <p>
-          &copy; {new Date().getFullYear()} Hugo Oliveira. All rights reserved.
-        </p>
+        <p>&copy; 2026 Hugo Oliveira. All rights reserved.</p>
       </footer>
     </div>
   );

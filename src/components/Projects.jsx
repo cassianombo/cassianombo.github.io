@@ -3,16 +3,16 @@ import { useEffect, useRef, useState } from "react";
 const Projects = () => {
   const projects = [
     {
-      name: "Personal Budget - Nest.js API (Under Development)",
+      name: "Personal Budget - Nest.js API (WIP)",
       description:
-        "A NestJS API developed to manage personal finances. The API is used to track income and expenses, and to generate reports.",
+        "Designed a NestJS API to manage personal finances, focusing on scalability, authentication, and reporting patterns commonly used in fintech products.",
       techStack: ["Nest.js", "TypeScript", "PostgreSQL"],
       github: "https://github.com/cassianombo/personal-budget-api",
     },
     {
-      name: "Personal Budget - React Native App (Under Development)",
+      name: "Personal Budget - React Native App (WIP)",
       description:
-        "A React Native app developed to manage personal finances. The app is used to track income and expenses, and to generate reports.",
+        "A React Native app developed to manage personal finances. The app is used to track income and expenses, focused on usability, offline-first patterns, and clear financial insights.",
       techStack: ["React Native", "JavaScript", "Expo", "UI/UX Design"],
       github: "https://github.com/cassianombo/personal-budget",
     },

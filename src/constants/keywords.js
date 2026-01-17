@@ -13,6 +13,7 @@ export const EXPERIENCE_KEYWORDS = [
   "Apollo GraphQL",
   ".NET/WPF",
   "WPF",
+  ".NET",
   "GraphQL",
   "REST APIs",
   // Tools and Testing

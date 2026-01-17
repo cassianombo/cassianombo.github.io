@@ -1,7 +1,5 @@
-import { getGradientStyle } from "./color";
-
 /**
- * Highlights keywords in text with gradient styling
+ * Highlights keywords in text with solid color styling
  * @param {string} text - Text to highlight keywords in
  * @param {Array<string>} keywords - Array of keywords to highlight
  * @param {string} color - Color for highlighted keywords
@@ -19,10 +17,14 @@ export const highlightKeywords = (text, keywords, color) => {
 
   // Find all keyword occurrences (case-insensitive)
   sortedKeywords.forEach((keyword) => {
-    const regex = new RegExp(
-      `\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
-      "gi"
-    );
+    const escapedKeyword = keyword.replace(/[*+?^${}()|[\]\\]/g, "\\$&");
+
+    // If keyword starts with a dot (like ".NET"), don't use word boundary at start
+    const pattern = keyword.startsWith(".")
+      ? `${escapedKeyword}\\b`
+      : `\\b${escapedKeyword}\\b`;
+
+    const regex = new RegExp(pattern, "gi");
     let match;
     while ((match = regex.exec(text)) !== null) {
       matches.push({
@@ -75,10 +77,7 @@ export const highlightKeywords = (text, keywords, color) => {
     <>
       {parts.map((part, index) =>
         part.highlight ? (
-          <span
-            key={index}
-            className="font-semibold"
-            style={getGradientStyle(color, "to-r")}>
+          <span key={index} className="font-semibold" style={{ color: color }}>
             {part.text}
           </span>
         ) : (

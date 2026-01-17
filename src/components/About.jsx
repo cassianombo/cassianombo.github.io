@@ -36,10 +36,12 @@ const About = () => {
           <p
             className="text-github-text-secondary mb-6 text-lg leading-relaxed fade-in opacity-0"
             style={{ animationDelay: "0.2s" }}>
-            I'm a passionate Software Engineer with a strong foundation in
-            Computer Engineering and currently pursuing a Master's in Data
-            Engineering. I specialize in creating efficient, scalable solutions
-            across web, mobile, and data-driven applications.
+            I'm a Software Engineer with hands-on experience in healthcare,
+            robotics, and enterprise environments, working across the full
+            development lifecycle — from architecture and implementation to
+            testing and delivery. Currently, I’m deepening my skills in data
+            engineering, aiming to bridge strong software fundamentals with
+            data-driven systems.
           </p>
 
           <div className="mt-8 space-y-8">
@@ -69,8 +71,8 @@ const About = () => {
 
               <div className="grid md:grid-cols-2 gap-4">
                 {/* Master Degree */}
-                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-accent/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/10 to-blue-600/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -81,7 +83,7 @@ const About = () => {
                             className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                           />
                           <div className="flex-1">
-                            <h4 className="text-lg font-bold text-github-text group-hover:text-accent transition-colors">
+                            <h4 className="text-lg font-bold text-github-text group-hover:text-red-400 transition-colors">
                               Master in Data Engineering
                             </h4>
                             <p className="text-sm text-github-text-secondary mt-0.5">
@@ -113,8 +115,8 @@ const About = () => {
                 </div>
 
                 {/* Bachelor Degree */}
-                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-accent/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -125,7 +127,7 @@ const About = () => {
                             className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                           />
                           <div className="flex-1">
-                            <h4 className="text-lg font-bold text-github-text group-hover:text-accent transition-colors">
+                            <h4 className="text-lg font-bold text-github-text group-hover:text-red-400 transition-colors">
                               Bachelor in Computer Engineering
                             </h4>
                             <p className="text-sm text-github-text-secondary mt-0.5">
@@ -218,8 +220,8 @@ const About = () => {
                 </div>
 
                 {/* Docker Course */}
-                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-blue-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
                       <img
@@ -228,7 +230,7 @@ const About = () => {
                         className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-base font-bold text-github-text group-hover:text-blue-400 transition-colors line-clamp-2">
+                        <h4 className="text-base font-bold text-github-text group-hover:text-purple-400 transition-colors line-clamp-2">
                           Docker for absolute Beginners – Hands on – DevOps
                         </h4>
                         <p className="text-xs text-github-text-secondary mt-0.5">

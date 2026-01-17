@@ -119,7 +119,6 @@ const Hero = () => {
               style={{ animationDelay: "0.1s" }}>
               Hi, I'm Hugo 👋
             </p>
-
             {/* Main title */}
             <h1
               className="text-5xl xl:text-7xl font-bold leading-tight"
@@ -128,14 +127,15 @@ const Hero = () => {
               <br />
               <span className="text-gradient drop-shadow-lg">Engineer</span>
             </h1>
-
             {/* Subtitle */}
-            <p
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-github-text leading-relaxed max-w-xl mx-auto lg:mx-0 opacity-90 px-2 sm:px-0"
-              style={{ animationDelay: "0.3s" }}>
-              Building scalable web and mobile applications with modern
-              technologies and best practices.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-github-text leading-relaxed max-w-xl mx-auto lg:mx-0 opacity-90 px-2 sm:px-0"
+                style={{ animationDelay: "0.3s" }}>
+                3 years of professional experience delivering software using
+                React, .NET, Node.js in healthcare & robotics
+              </p>
+            </div>
 
             {/* CTAs */}
             <div
