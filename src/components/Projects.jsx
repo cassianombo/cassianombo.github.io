@@ -19,7 +19,7 @@ const Projects = () => {
     {
       name: "King's Puppet - Unity Game",
       description:
-        "A 2D Unity game developed using C# and the Unity engine. The game is a auto-chess game used a project exercise to develop core development skills and UI/UX design.",
+        "A 2D Unity game developed using C# and the Unity engine. The game is an auto-chess game used as a project exercise to develop core development skills and UI/UX design.",
       techStack: ["Unity", "C#"],
       github: "https://github.com/cassianombo/kings-puppets-unity-project",
       demo: "https://cassianombo.itch.io/kings-puppets",

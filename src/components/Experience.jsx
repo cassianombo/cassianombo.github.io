@@ -7,10 +7,21 @@ import { highlightKeywords } from "../utils/textHighlight";
 const Experience = () => {
   const experiences = [
     {
+      title: "Software Engineer Internship",
+      company: "N4IT",
+      period: "Feb 2023 – Jun 2023",
+      logo: "/n4it_logo.jpeg",
+      description: [
+        "Developed a React-based internal web application to simplify infrastructure provisioning and deployment tracking",
+        "Designed and integrated a .NET REST API to automate Kubernetes cluster provisioning using PostgreSQL",
+        "Improved system reliability by implementing unit and integration tests (≈70% coverage with xUnit)",
+      ],
+      color: "#6366f1",
+    },
+    {
       title: "Software Engineer",
       company: "SARKKIS Robotics",
       period: "Jan 2024 – Feb 2025",
-      location: "",
       logo: "/sarkkis_robotics_lda_logo.jpeg",
       description: [
         "Developed enterprise-grade .NET/WPF applications using advanced design patterns",
@@ -23,7 +34,6 @@ const Experience = () => {
       title: "Software Developer",
       company: "Glintt Global",
       period: "Mar 2025 – Nov 2025",
-      location: "",
       logo: "/glintt_logo.jpeg",
       description: [
         "Built scalable frontend applications using ReactJS and Micro Frontend architectures",
@@ -37,7 +47,6 @@ const Experience = () => {
       title: "Software Engineer",
       company: "Capgemini Engineering",
       period: "Nov 2025 – Present",
-      location: "",
       logo: "/capgemini_logo.jpeg",
       description: [
         "Develop and maintain web applications using Next.js (React) and Tailwind CSS",
@@ -104,7 +113,7 @@ const Experience = () => {
                   <div
                     key={index}
                     className="experience-item opacity-0 flex-1 flex justify-center">
-                    <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-github-border/50 hover:border-github-bg-tertiary relative z-20 w-full max-w-sm h-[450px] flex flex-col overflow-hidden">
+                    <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-github-border/50 hover:border-github-bg-tertiary z-20 w-full max-w-sm flex flex-col overflow-hidden h-full">
                       {/* Subtle gradient overlay */}
                       <div
                         className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
@@ -114,7 +123,7 @@ const Experience = () => {
                           }, ${lightenColor(exp.color, 30)})`,
                         }}></div>
 
-                      <div className="relative z-10">
+                      <div className="relative z-10 flex flex-col h-full">
                         <div className="mb-4">
                           <span
                             className="inline-flex items-center text-xs font-semibold px-4 py-2 text-github-text border border-github-border/30 rounded-full backdrop-blur-sm"
