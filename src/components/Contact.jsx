@@ -2,8 +2,8 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 px-8 bg-zinc-950">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-github-text mb-4">
-          <span className="text-gradient">Contact</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-4">
+          <span className="text-accent">Contact</span>
         </h2>
         <p className="text-github-text-secondary mb-8">
           Looking for an engineer who cares about quality and impact? Let’s

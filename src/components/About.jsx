@@ -12,7 +12,7 @@ const About = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -28,8 +28,8 @@ const About = () => {
       id="about"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-zinc-950 relative">
       <div ref={sectionRef} className="max-w-4xl px-4 mx-auto">
-        <h2 className="text-4xl font-bold text-github-text mb-4 text-center fade-in opacity-0">
-          <span className="text-gradient">About Me</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-4 text-center fade-in opacity-0">
+          <span className="text-accent">About Me</span>
         </h2>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -50,7 +50,7 @@ const About = () => {
               className="fade-in opacity-0"
               style={{ animationDelay: "0.4s" }}>
               <div className="flex items-center mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-blue-600 flex items-center justify-center mr-3">
+                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mr-3">
                   <svg
                     className="w-6 h-6 text-white"
                     fill="none"
@@ -72,7 +72,7 @@ const About = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 {/* Master Degree */}
                 <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -92,7 +92,7 @@ const About = () => {
                           </div>
                         </div>
                       </div>
-                      <span className="ml-3 px-2.5 py-1 text-xs font-semibold bg-gradient-to-r from-accent/20 to-blue-600/20 text-accent rounded-full border border-accent/30 whitespace-nowrap">
+                      <span className="ml-3 px-2.5 py-1 text-xs font-semibold bg-accent/10 text-accent rounded-full border border-accent/30 whitespace-nowrap">
                         Present
                       </span>
                     </div>
@@ -116,7 +116,7 @@ const About = () => {
 
                 {/* Bachelor Degree */}
                 <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -162,7 +162,7 @@ const About = () => {
               className="fade-in opacity-0"
               style={{ animationDelay: "0.6s" }}>
               <div className="flex items-center mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mr-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mr-3">
                   <svg
                     className="w-6 h-6 text-white"
                     fill="none"
@@ -184,7 +184,7 @@ const About = () => {
               <div className="grid md:grid-cols-3 gap-4">
                 {/* React Native Course */}
                 <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
                       <img
@@ -221,7 +221,7 @@ const About = () => {
 
                 {/* Docker Course */}
                 <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
                       <img
@@ -258,7 +258,7 @@ const About = () => {
 
                 {/* Angular Course */}
                 <div className="group relative bg-github-bg-secondary p-5 rounded-xl border border-github-border hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/10 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
                       <img

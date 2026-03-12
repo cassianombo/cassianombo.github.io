@@ -30,32 +30,17 @@ export const lightenColor = (hex, percent) => {
 };
 
 /**
- * Creates a gradient text style object
+ * Creates a solid text style object (no gradients)
  * @param {string} color - Base hex color
- * @param {string} direction - Gradient direction ("to-r", "to-br", "to-b")
- * @returns {Object} Style object for gradient text
+ * @returns {Object} Style object for solid-colored text
  */
-export const getGradientStyle = (color, direction = "to-r") => {
+export const getGradientStyle = (color) => {
   if (!color || typeof color !== "string") {
     return {
-      background: "linear-gradient(to right, #ffffff, #ffffff)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      backgroundClip: "text",
+      color: "#ffffff",
     };
   }
-  const lighterColor = lightenColor(color, 20);
-  const directionMap = {
-    "to-r": "to right",
-    "to-br": "to bottom right",
-    "to-b": "to bottom",
-  };
   return {
-    background: `linear-gradient(${
-      directionMap[direction] || "to right"
-    }, ${color}, ${lighterColor})`,
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
+    color,
   };
 };

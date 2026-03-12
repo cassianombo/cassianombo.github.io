@@ -42,7 +42,7 @@ const Projects = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -55,8 +55,8 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 px-8 bg-github-bg relative">
       <div ref={sectionRef} className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-github-text mb-4 text-center">
-          <span className="text-gradient">Projects</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-4 text-center">
+          <span className="text-accent">Projects</span>
         </h2>
         <p className="text-center text-github-text-secondary mb-12">
           A showcase of my recent work and side projects
@@ -103,15 +103,8 @@ const ProjectCard = ({ project }) => {
           : "perspective(1000px) rotateY(0deg) rotateX(0deg)",
         transition: "transform 0.1s ease-out",
       }}>
-      {/* Gradient overlay on hover */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-accent/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          background: isHovered
-            ? `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 50%)`
-            : "transparent",
-        }}
-      />
+      {/* Subtle flat highlight on hover */}
+      <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
       <div className="relative p-6 z-10">
         <div className="flex items-center justify-between mb-3">

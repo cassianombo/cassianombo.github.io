@@ -15,7 +15,7 @@ const Hero = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (heroRef.current) {
@@ -121,11 +121,13 @@ const Hero = () => {
             </p>
             {/* Main title */}
             <h1
-              className="text-5xl xl:text-7xl font-bold leading-tight"
+              className="text-5xl md:text-7xl font-bold leading-tight"
               style={{ animationDelay: "0.2s" }}>
-              <span className="text-white drop-shadow-lg">Software</span>
+              <span className="text-white drop-shadow-lg">Full-Stack</span>
               <br />
-              <span className="text-gradient drop-shadow-lg">Engineer</span>
+              <span className="text-[#60a5fa] drop-shadow-lg">
+                Software Engineer
+              </span>
             </h1>
             {/* Subtitle */}
             <div className="flex flex-col gap-2">
@@ -144,9 +146,8 @@ const Hero = () => {
               {/* Primary CTA */}
               <button
                 onClick={() => scrollToSection("projects")}
-                className="group relative px-6 sm:px-8 py-2.5 sm:py-4 bg-accent hover:bg-blue-600 text-white rounded-lg font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl overflow-hidden whitespace-nowrap flex-1 sm:flex-initial">
-                <span className="relative z-10">View Projects</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                className="px-6 sm:px-8 py-2.5 sm:py-4 bg-accent hover:bg-accent-dark text-white rounded-lg font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap flex-1 sm:flex-initial">
+                View Projects
               </button>
 
               {/* CV Download Button */}

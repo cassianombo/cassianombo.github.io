@@ -96,7 +96,7 @@ const Experience = () => {
     <section id="experience" className="py-12 sm:py-20 px-8 bg-zinc-950">
       <div ref={sectionRef} className="max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-3 sm:mb-4 text-center">
-          <span className="text-gradient">Experience</span>
+          <span className="text-accent">Experience</span>
         </h2>
         <p className="text-center text-github-text-secondary text-base sm:text-lg mb-8 sm:mb-0">
           My professional journey
@@ -114,13 +114,11 @@ const Experience = () => {
                     key={index}
                     className="experience-item opacity-0 flex-1 flex justify-center">
                     <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-github-border/50 hover:border-github-bg-tertiary z-20 w-full max-w-sm flex flex-col overflow-hidden h-full">
-                      {/* Subtle gradient overlay */}
+                      {/* Subtle flat overlay */}
                       <div
                         className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
                         style={{
-                          background: `linear-gradient(to bottom right, ${
-                            exp.color
-                          }, ${lightenColor(exp.color, 30)})`,
+                          backgroundColor: exp.color,
                         }}></div>
 
                       <div className="relative z-10 flex flex-col h-full">
@@ -187,8 +185,8 @@ const Experience = () => {
                               key={itemIndex}
                               className="text-sm text-github-text-secondary flex items-start leading-relaxed group-hover:text-github-text transition-colors duration-300">
                               <span
-                                className="inline-block mr-3 mt-0.5 font-bold flex-shrink-0 text-lg"
-                                style={getGradientStyle(exp.color, "to-r")}>
+                              className="inline-block mr-3 mt-0.5 font-bold flex-shrink-0 text-lg"
+                              style={getGradientStyle(exp.color)}>
                                 ▸
                               </span>
                               <span className="flex-1">
@@ -210,8 +208,8 @@ const Experience = () => {
               {/* Middle row - Timeline line and dots */}
               <div className="relative flex justify-between items-center z-10 gap-4 mt-8">
                 {/* Horizontal timeline line */}
-                <div className="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-accent/50 via-purple-500/50 to-transparent -translate-y-1/2 rounded-full z-0"></div>
-                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-accent via-purple-500 to-transparent -translate-y-1/2 rounded-full z-0 blur-sm"></div>
+                <div className="absolute left-0 right-0 top-1/2 h-1 bg-accent/30 -translate-y-1/2 rounded-full z-0"></div>
+                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-accent/50 -translate-y-1/2 rounded-full z-0 blur-sm"></div>
 
                 {/* Timeline dots */}
                 {experiences.map((exp, index) => (
@@ -221,16 +219,12 @@ const Experience = () => {
                     <div
                       className="relative w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 flex items-center justify-center ring-4 ring-github-bg group cursor-pointer"
                       style={{
-                        background: `linear-gradient(to bottom right, ${
-                          exp.color
-                        }, ${lightenColor(exp.color, 20)})`,
+                        backgroundColor: exp.color,
                       }}>
                       <div
                         className="absolute inset-0 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"
                         style={{
-                          background: `linear-gradient(to bottom right, ${
-                            exp.color
-                          }, ${lightenColor(exp.color, 20)})`,
+                          backgroundColor: exp.color,
                         }}></div>
                       <div className="relative w-6 h-6 bg-github-bg rounded-full"></div>
                     </div>
@@ -245,8 +239,8 @@ const Experience = () => {
         <div className="block lg:hidden">
           <div className="relative">
             {/* Vertical timeline line */}
-            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent/50 via-purple-500/50 to-transparent"></div>
-            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-purple-500 to-transparent blur-sm"></div>
+            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-accent/30"></div>
+            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-accent/50 blur-sm"></div>
 
             <div className="space-y-8 sm:space-y-12">
               {[...experiences].reverse().map((exp, index) => (
@@ -258,16 +252,12 @@ const Experience = () => {
                     <div
                       className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-lg transform transition-all duration-300 flex items-center justify-center group"
                       style={{
-                        background: `linear-gradient(to bottom right, ${
-                          exp.color
-                        }, ${lightenColor(exp.color, 20)})`,
+                        backgroundColor: exp.color,
                       }}>
                       <div
                         className="absolute inset-0 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"
                         style={{
-                          background: `linear-gradient(to bottom right, ${
-                            exp.color
-                          }, ${lightenColor(exp.color, 20)})`,
+                          backgroundColor: exp.color,
                         }}></div>
                       <div className="relative w-2.5 h-2.5 sm:w-3 sm:h-3 bg-github-bg rounded-full"></div>
                     </div>
@@ -275,13 +265,11 @@ const Experience = () => {
 
                   {/* Card */}
                   <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-github-border/50 hover:border-github-bg-tertiary overflow-hidden w-full flex flex-col">
-                    {/* Subtle gradient overlay */}
+                    {/* Subtle flat overlay */}
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
                       style={{
-                        background: `linear-gradient(to bottom right, ${
-                          exp.color
-                        }, ${lightenColor(exp.color, 30)})`,
+                        backgroundColor: exp.color,
                       }}></div>
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -351,7 +339,7 @@ const Experience = () => {
                             className="text-xs sm:text-sm text-github-text-secondary flex items-start leading-relaxed sm:leading-relaxed group-hover:text-github-text transition-colors duration-300">
                             <span
                               className="inline-block mr-2 sm:mr-3 mt-0.5 font-bold flex-shrink-0 text-base sm:text-lg"
-                              style={getGradientStyle(exp.color, "to-r")}>
+                              style={getGradientStyle(exp.color)}>
                               ▸
                             </span>
                             <span className="flex-1">

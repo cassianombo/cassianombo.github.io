@@ -55,7 +55,7 @@ const Skills = () => {
       description: "Technologies I'm strongest at",
       skills: ["React", ".NET", "Node.js", "PostgreSQL", "MongoDB"],
       icon: PrimaryIcon,
-      gradient: "from-blue-500 to-cyan-500",
+      color: "bg-blue-500",
     },
     {
       title: "Production Experience",
@@ -70,14 +70,14 @@ const Skills = () => {
         "WPF",
       ],
       icon: ProductionIcon,
-      gradient: "from-purple-500 to-pink-500",
+      color: "bg-purple-500",
     },
     {
       title: "Familiar With",
       description: "Working knowledge",
       skills: ["Angular", "NestJS", "React Native", "Python", "Java"],
       icon: FamiliarIcon,
-      gradient: "from-orange-500 to-yellow-500",
+      color: "bg-orange-500",
     },
   ];
 
@@ -97,7 +97,7 @@ const Skills = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -115,12 +115,12 @@ const Skills = () => {
 
       <div className="px-8 py-20 ">
         {/* Background decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-accent/10 to-purple-500/10 rounded-full blur-3xl z-0"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl z-0"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl z-0"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl z-0"></div>
 
         <div ref={sectionRef} className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-4xl font-bold text-github-text mb-4 text-center">
-            <span className="text-gradient">Skills & Tech Stack</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-4 text-center">
+            <span className="text-accent">Skills & Tech Stack</span>
           </h2>
           <p className="text-center text-github-text-secondary mb-12">
             Organized by experience level
@@ -131,14 +131,15 @@ const Skills = () => {
               <div
                 key={index}
                 className="skill-card opacity-0 bg-github-bg-secondary p-6 rounded-xl border border-github-border hover:border-github-bg-tertiary shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group relative overflow-hidden">
-                {/* Gradient border effect */}
+                {/* Subtle flat border effect */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${level.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}></div>
+                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl"
+                  style={{ backgroundColor: "rgba(59, 130, 246, 0.15)" }}></div>
 
                 <div className="relative z-10">
                   <div className="flex items-center mb-3">
                     <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${level.gradient} flex items-center justify-center mr-3 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
+                      className={`w-12 h-12 rounded-lg ${level.color} flex items-center justify-center mr-3 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
                       <level.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
