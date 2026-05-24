@@ -20,7 +20,7 @@ export default {
     contactAfter: ".",
     scrollToContact: "Scroll to contact section",
     resume: "Resume",
-    cvHref: "/Hugo Oliviera CV.pdf",
+    cvHref: "/hugo-oliveira-cv-en.pdf",
   },
   experience: {
     work: "Work",
