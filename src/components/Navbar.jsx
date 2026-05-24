@@ -60,15 +60,17 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur-sm">
+    <header className="sticky top-0 z-50 overscroll-none border-b border-border/40 bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur-sm">
       <div className="mx-auto max-w-content page-padding py-4 sm:py-6">
         <nav className="flex items-center gap-3">
-          <ul className="scrollbar-none flex min-w-0 flex-1 gap-1.5 overflow-x-auto sm:gap-3">
+          <ul className="nav-scroll scrollbar-none flex min-w-0 flex-1 gap-1.5 sm:gap-3">
             {navItems.map((item) => (
               <li key={item.key}>
                 {item.hash ? (
                   <Link
                     to={item.to}
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
                     onClick={handleHashNav(item)}
                     className={
                       highlighted === getNavKey(item)
@@ -80,6 +82,8 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={item.to}
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
                     onClick={handleHomeNav}
                     className={
                       highlighted === getNavKey(item)

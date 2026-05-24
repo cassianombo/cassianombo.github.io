@@ -106,4 +106,17 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
+
+  .nav-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .nav-scroll a {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
 }
