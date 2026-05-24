@@ -21,6 +21,7 @@ export default {
     scrollToContact: "Scroll to contact section",
     resume: "Resume",
     cvHref: "/hugo-oliveira-cv-en.pdf",
+    cvDownloadName: "Hugo-Oliveira-CV.pdf",
   },
   experience: {
     work: "Work",

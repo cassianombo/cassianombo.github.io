@@ -21,6 +21,7 @@ export default {
     scrollToContact: "Ir para a secção de contacto",
     resume: "Currículo",
     cvHref: "/hugo-oliveira-cv-pt.pdf",
+    cvDownloadName: "Hugo-Oliveira-CV.pdf",
   },
   experience: {
     work: "Trabalho",

@@ -63,11 +63,8 @@ const Hero = () => {
           <section className="mt-6 flex flex-wrap items-center justify-center gap-4 md:justify-start">
             <a
               href={t("hero.cvHref")}
-              target="_blank"
-              rel="noopener noreferrer">
-              <button
-                type="button"
-                className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:h-9">
+              download={t("hero.cvDownloadName")}
+              className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:h-9">
                 <span className="font-semibold">{t("hero.resume")}</span>
                 <svg
                   className="ml-2 size-5"
@@ -83,7 +80,6 @@ const Hero = () => {
                   <path d="M12 18v-6" />
                   <path d="m9 15 3 3 3-3" />
                 </svg>
-              </button>
             </a>
             <SocialLinks />
           </section>
