@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useLocale } from "../i18n/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
-import ThemeToggle from "./ThemeToggle";
 
 const HIGHLIGHT_MS = 1500;
 
@@ -96,10 +95,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="flex shrink-0 items-center gap-0.5">
-            <LanguageToggle />
-            <ThemeToggle />
-          </div>
+          <LanguageToggle className="shrink-0" />
         </nav>
       </div>
     </header>

@@ -46,12 +46,6 @@ export default {
     intro:
       "Aberto a oportunidades onde software de qualidade e impacto real importam.",
   },
-  theme: {
-    switchToLight: "Mudar para modo claro",
-    switchToDark: "Mudar para modo escuro",
-    lightMode: "Modo claro",
-    darkMode: "Modo escuro",
-  },
   locale: {
     switchLanguage: "Mudar idioma",
     en: "English",

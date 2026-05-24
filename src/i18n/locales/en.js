@@ -45,12 +45,6 @@ export default {
     title: "contact",
     intro: "Open to roles where quality software and real impact matter.",
   },
-  theme: {
-    switchToLight: "Switch to light mode",
-    switchToDark: "Switch to dark mode",
-    lightMode: "Light mode",
-    darkMode: "Dark mode",
-  },
   locale: {
     switchLanguage: "Switch language",
     en: "English",
