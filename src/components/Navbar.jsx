@@ -1,69 +1,104 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { scrollToSection } from "../utils/scroll";
+import { useLocale } from "../i18n/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
+import ThemeToggle from "./ThemeToggle";
+
+const HIGHLIGHT_MS = 1500;
+
+const navItems = [
+  { key: "nav.home", to: "/", hash: null },
+  { key: "nav.experience", to: "/#experience", hash: "experience" },
+  { key: "nav.projects", to: "/#projects", hash: "projects" },
+  { key: "nav.contact", to: "/#contact", hash: "contact" },
+];
+
+const getNavKey = (item) => item.hash ?? "home";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLocale();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [highlighted, setHighlighted] = useState(null);
+  const highlightTimerRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const highlightNav = (key) => {
+    setHighlighted(key);
+    if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current);
+    highlightTimerRef.current = setTimeout(() => {
+      setHighlighted(null);
+      highlightTimerRef.current = null;
+    }, HIGHLIGHT_MS);
+  };
 
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
+  useEffect(
+    () => () => {
+      if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current);
+    },
+    [],
+  );
+
+  const handleHashNav = (item) => (e) => {
+    const hash = item.hash;
+    highlightNav(hash);
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate({ pathname: "/", hash });
+      return;
+    }
+    document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    navigate({ hash }, { replace: true });
+  };
+
+  const handleHomeNav = (e) => {
+    highlightNav("home");
+    if (location.pathname !== "/") return;
+    e.preventDefault();
+    navigate({ pathname: "/" }, { replace: true });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-github-bg/80 backdrop-blur-md shadow-sm border-b border-github-border"
-          : "bg-transparent"
-      }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <button
-            onClick={() => scrollToSection("hero")}
-            className="text-xl font-bold text-github-text hover:text-accent transition-colors">
-            Hugo Oliveira
-          </button>
-
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex space-x-6">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-github-text-secondary hover:text-github-text transition-colors">
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="text-github-text-secondary hover:text-github-text transition-colors">
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("experience")}
-                className="text-github-text-secondary hover:text-github-text transition-colors">
-                Experience
-              </button>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="text-github-text-secondary hover:text-github-text transition-colors">
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="text-github-text-secondary hover:text-github-text transition-colors">
-                Contact
-              </button>
-            </div>
+    <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur-sm">
+      <div className="mx-auto max-w-content page-padding py-4 sm:py-6">
+        <nav className="flex items-center gap-3">
+          <ul className="scrollbar-none flex min-w-0 flex-1 gap-1.5 overflow-x-auto sm:gap-3">
+            {navItems.map((item) => (
+              <li key={item.key}>
+                {item.hash ? (
+                  <Link
+                    to={item.to}
+                    onClick={handleHashNav(item)}
+                    className={
+                      highlighted === getNavKey(item)
+                        ? "nav-link-active"
+                        : "nav-link-inactive"
+                    }>
+                    {t(item.key)}
+                  </Link>
+                ) : (
+                  <Link
+                    to={item.to}
+                    onClick={handleHomeNav}
+                    className={
+                      highlighted === getNavKey(item)
+                        ? "nav-link-active"
+                        : "nav-link-inactive"
+                    }>
+                    {t(item.key)}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="flex shrink-0 items-center gap-0.5">
+            <LanguageToggle />
+            <ThemeToggle />
           </div>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 };
 

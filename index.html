@@ -1,11 +1,31 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/svg+xml" href="/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Hugo Oliveira - Software Engineer</title>
     <meta name="description" content="Portfolio of Hugo Oliveira - Software Engineer specializing in Web, Mobile, Data and AI" />
+    <script>
+      (function () {
+        var k = "portfolio-theme";
+        var s = localStorage.getItem(k);
+        var d = document.documentElement;
+        if (s === "light") d.classList.remove("dark");
+        else if (s === "dark") d.classList.add("dark");
+        else if (matchMedia("(prefers-color-scheme: dark)").matches)
+          d.classList.add("dark");
+        else d.classList.remove("dark");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

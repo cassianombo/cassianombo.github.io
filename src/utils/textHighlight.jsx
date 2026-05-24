@@ -2,11 +2,11 @@
  * Highlights keywords in text with solid color styling
  * @param {string} text - Text to highlight keywords in
  * @param {Array<string>} keywords - Array of keywords to highlight
- * @param {string} color - Color for highlighted keywords
+ * @param {string} highlightClassName - Tailwind classes for highlighted keywords
  * @returns {JSX.Element} Text with highlighted keywords
  */
-export const highlightKeywords = (text, keywords, color) => {
-  if (!color || typeof color !== "string") {
+export const highlightKeywords = (text, keywords, highlightClassName) => {
+  if (!highlightClassName || typeof highlightClassName !== "string") {
     return <>{text}</>;
   }
 
@@ -77,7 +77,7 @@ export const highlightKeywords = (text, keywords, color) => {
     <>
       {parts.map((part, index) =>
         part.highlight ? (
-          <span key={index} className="font-semibold" style={{ color: color }}>
+          <span key={index} className={highlightClassName}>
             {part.text}
           </span>
         ) : (

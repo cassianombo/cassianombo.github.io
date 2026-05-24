@@ -1,363 +1,277 @@
-import { getGradientStyle, lightenColor } from "../utils/color";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { EXPERIENCE_KEYWORDS } from "../constants/keywords";
+import { useLocale } from "../i18n/LanguageContext";
 import { highlightKeywords } from "../utils/textHighlight";
 
+const COLLAPSE_MS = 280;
+const EXPAND_MS = 320;
+
+const EducationPanel = ({ educationExperience, certifications }) => (
+  <>
+    <TimelineList companies={educationExperience} highlight />
+    {certifications.length > 0 && (
+      <div className="surface mt-6">
+        <ul className="divide-y divide-border">
+          {certifications.map((cert) => (
+            <li
+              key={cert.title}
+              className="flex flex-wrap items-start gap-3 p-4 text-sm sm:flex-nowrap sm:items-center sm:gap-4">
+              {cert.logo && (
+                <img
+                  src={cert.logo}
+                  alt=""
+                  className="size-8 shrink-0 object-contain"
+                />
+              )}
+              <div className="min-w-0 flex-1">
+                <p className="font-medium leading-snug">{cert.title}</p>
+                <p className="text-xs text-muted-foreground">{cert.issuer}</p>
+              </div>
+              <time className="w-full shrink-0 text-xs tabular-nums text-muted-foreground sm:w-auto">
+                {cert.period}
+              </time>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </>
+);
+
+const CompanyAvatar = ({ logo, name, avatarClassName, logoClassName }) => (
+  <span
+    className={`relative flex size-10 shrink-0 overflow-hidden rounded-full border sm:size-12 ${
+      avatarClassName ?? "bg-background"
+    }`}>
+    {logo ? (
+      <img
+        src={logo}
+        alt=""
+        className={logoClassName ?? "h-full w-full object-cover"}
+      />
+    ) : (
+      <span className="flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground">
+        {name.charAt(0)}
+      </span>
+    )}
+  </span>
+);
+
+const RoleBlock = ({ role, highlight }) => (
+  <div>
+    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+      <p className="text-sm font-medium leading-none text-foreground/45">
+        {role.title}
+      </p>
+      <time className="shrink-0 text-xs tabular-nums text-foreground/55 sm:whitespace-nowrap">
+        {role.period}
+      </time>
+    </div>
+    {role.bullets?.length > 0 && (
+      <ul className="ml-4 mt-2 list-outside list-disc">
+        {role.bullets.map((item, i) => (
+          <li key={i} className="text-sm leading-relaxed text-foreground/85">
+            {highlight
+              ? highlightKeywords(
+                  item,
+                  EXPERIENCE_KEYWORDS,
+                  "font-semibold text-foreground",
+                )
+              : item}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
+
+const TimelineList = ({ companies, highlight }) => (
+  <div className="surface">
+    <ul className="divide-y divide-border sm:ml-10 sm:divide-y-0 sm:border-l sm:border-border">
+      {companies.map((company) => (
+        <li
+          key={`${company.company}-${company.roles[0]?.title}`}
+          className="p-4 sm:relative sm:ml-10 sm:py-4 sm:pl-0">
+          <div className="flex gap-3 sm:block">
+            <div className="shrink-0 sm:absolute sm:-left-16 sm:top-4">
+              <CompanyAvatar
+                logo={company.logo}
+                name={company.company}
+                avatarClassName={company.avatarClassName}
+                logoClassName={company.logoClassName}
+              />
+            </div>
+            <div className="min-w-0 flex-1 sm:w-full">
+              <h2 className="text-base font-semibold leading-snug">
+                {company.company}
+              </h2>
+              <div className="mt-1.5 flex flex-col gap-2 sm:mt-2">
+                {company.roles.map((role) => (
+                  <RoleBlock
+                    key={`${company.company}-${role.title}`}
+                    role={role}
+                    highlight={highlight}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const Experience = () => {
-  const experiences = [
-    {
-      title: "Software Engineer Internship",
-      company: "N4IT",
-      period: "Feb 2023 – Jun 2023",
-      logo: "/n4it_logo.jpeg",
-      description: [
-        "Developed a React-based internal web application to simplify infrastructure provisioning and deployment tracking",
-        "Designed and integrated a .NET REST API to automate Kubernetes cluster provisioning using PostgreSQL",
-        "Improved system reliability by implementing unit and integration tests (≈70% coverage with xUnit)",
-      ],
-      color: "#6366f1",
-    },
-    {
-      title: "Software Engineer",
-      company: "SARKKIS Robotics",
-      period: "Jan 2024 – Feb 2025",
-      logo: "/sarkkis_robotics_lda_logo.jpeg",
-      description: [
-        "Developed enterprise-grade .NET/WPF applications using advanced design patterns",
-        "Reduced technical debt and simulation errors by 85% through a custom 3D CAD visualization module",
-        "Collaborated with international teams (Canada & Europe) on industrial robotics solutions",
-      ],
-      color: "#cf0f13",
-    },
-    {
-      title: "Software Developer",
-      company: "Glintt Global",
-      period: "Mar 2025 – Nov 2025",
-      logo: "/glintt_logo.jpeg",
-      description: [
-        "Built scalable frontend applications using ReactJS and Micro Frontend architectures",
-        "Integrated .NET APIs with Apollo GraphQL, improving data-fetching performance",
-        "Maintained 90%+ test coverage using Jest and React Testing Library",
-        "Delivered mission-critical digital solutions for hospitals in Portugal and Spain",
-      ],
-      color: "#01e4d1",
-    },
-    {
-      title: "Software Engineer",
-      company: "Capgemini Engineering",
-      period: "Nov 2025 – Present",
-      logo: "/capgemini_logo.jpeg",
-      description: [
-        "Develop and maintain web applications using Next.js (React) and Tailwind CSS",
-        "Manage application state with Zustand and consume REST APIs",
-        "Implement runtime data validation with Zod to ensure data consistency and reliability",
-        "Work in an Agile (SCRUM) environment within the public healthcare sector (SPMS - Portal Inovar)",
-      ],
-      color: "#2790f5",
-    },
-  ];
+  const { t, profile } = useLocale();
+  const { workExperience, educationExperience, certifications } = profile;
 
-  const sectionRef = useRef(null);
+  const tabs = useMemo(
+    () => [
+      { id: "work", label: t("experience.work") },
+      { id: "education", label: t("experience.education") },
+    ],
+    [t],
+  );
 
-  useEffect(() => {
-    const timeouts = [];
-    let hasAnimated = false;
+  const [activeTab, setActiveTab] = useState("work");
+  const [visibleTab, setVisibleTab] = useState("work");
+  const [panelPhase, setPanelPhase] = useState("open");
+  const panelRef = useRef(null);
+  const contentRef = useRef(null);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            hasAnimated = true;
-            const items = entry.target.querySelectorAll(".experience-item");
-            items.forEach((item, index) => {
-              const timeoutId = setTimeout(() => {
-                item.classList.add("animate-fade-in-up");
-              }, index * 200);
-              timeouts.push(timeoutId);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+  const handleTabChange = (tabId) => {
+    if (tabId === activeTab) return;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    setActiveTab(tabId);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisibleTab(tabId);
+      return;
     }
 
-    return () => {
-      observer.disconnect();
-      timeouts.forEach((timeout) => clearTimeout(timeout));
+    if (panelPhase !== "open") return;
+    setPanelPhase("collapse");
+  };
+
+  useEffect(() => {
+    if (panelPhase !== "collapse") return;
+
+    const panel = panelRef.current;
+    const content = contentRef.current;
+    if (!panel || !content) {
+      setVisibleTab(activeTab);
+      setPanelPhase("open");
+      return;
+    }
+
+    const startHeight = content.scrollHeight;
+    panel.style.overflow = "hidden";
+    panel.style.height = `${startHeight}px`;
+
+    const onCollapseEnd = (event) => {
+      if (event.propertyName !== "height") return;
+      panel.removeEventListener("transitionend", onCollapseEnd);
+      setVisibleTab(activeTab);
+      setPanelPhase("expand");
     };
-  }, []);
+
+    panel.addEventListener("transitionend", onCollapseEnd);
+
+    requestAnimationFrame(() => {
+      panel.style.transition = `height ${COLLAPSE_MS}ms cubic-bezier(0.4, 0, 1, 1), opacity ${COLLAPSE_MS}ms ease, transform ${COLLAPSE_MS}ms cubic-bezier(0.4, 0, 1, 1)`;
+      panel.style.opacity = "0";
+      panel.style.transform = "translateY(-12px)";
+      panel.style.height = "0px";
+    });
+
+    return () => panel.removeEventListener("transitionend", onCollapseEnd);
+  }, [panelPhase, activeTab]);
+
+  useEffect(() => {
+    if (panelPhase !== "expand") return;
+
+    const panel = panelRef.current;
+    const content = contentRef.current;
+    if (!panel || !content) {
+      setPanelPhase("open");
+      return;
+    }
+
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+    panel.style.transform = "translateY(-12px)";
+
+    const onExpandEnd = (event) => {
+      if (event.propertyName !== "height") return;
+      panel.removeEventListener("transitionend", onExpandEnd);
+      panel.style.height = "";
+      panel.style.overflow = "";
+      panel.style.transition = "";
+      panel.style.opacity = "";
+      panel.style.transform = "";
+      setPanelPhase("open");
+    };
+
+    panel.addEventListener("transitionend", onExpandEnd);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const endHeight = content.scrollHeight;
+        panel.style.transition = `height ${EXPAND_MS}ms cubic-bezier(0, 0, 0.2, 1), opacity ${EXPAND_MS}ms ease, transform ${EXPAND_MS}ms cubic-bezier(0, 0, 0.2, 1)`;
+        panel.style.height = `${endHeight}px`;
+        panel.style.opacity = "1";
+        panel.style.transform = "translateY(0)";
+      });
+    });
+
+    return () => panel.removeEventListener("transitionend", onExpandEnd);
+  }, [panelPhase, visibleTab]);
 
   return (
-    <section id="experience" className="py-12 sm:py-20 px-8 bg-zinc-950">
-      <div ref={sectionRef} className="max-w-7xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-github-text mb-3 sm:mb-4 text-center">
-          <span className="text-accent">Experience</span>
-        </h2>
-        <p className="text-center text-github-text-secondary text-base sm:text-lg mb-8 sm:mb-0">
-          My professional journey
-        </p>
+    <section id="experience" className="scroll-mt-24">
+      <div
+        role="tablist"
+        className="relative mb-2 grid h-9 w-full grid-cols-2 rounded-lg bg-muted p-1 text-muted-foreground">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-0.25rem)] rounded-md bg-background transition-transform duration-300 ease-out motion-reduce:transition-none"
+          style={{
+            transform:
+              activeTab === "work" ? "translateX(0)" : "translateX(100%)",
+          }}
+        />
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            onClick={() => handleTabChange(tab.id)}
+            className={`relative z-10 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+              activeTab === tab.id
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}>
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
-        {/* Horizontal Timeline - Desktop View */}
-        <div className="hidden lg:block">
-          <div className="relative py-24">
-            {/* Container with 3 vertical rows */}
-            <div className="relative px-0">
-              {/* Top row - All cards */}
-              <div className="flex justify-between items-stretch mb-8 relative z-10 gap-4">
-                {experiences.map((exp, index) => (
-                  <div
-                    key={index}
-                    className="experience-item opacity-0 flex-1 flex justify-center">
-                    <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-github-border/50 hover:border-github-bg-tertiary z-20 w-full max-w-sm flex flex-col overflow-hidden h-full">
-                      {/* Subtle flat overlay */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                        style={{
-                          backgroundColor: exp.color,
-                        }}></div>
-
-                      <div className="relative z-10 flex flex-col h-full">
-                        <div className="mb-4">
-                          <span
-                            className="inline-flex items-center text-xs font-semibold px-4 py-2 text-github-text border border-github-border/30 rounded-full backdrop-blur-sm"
-                            style={{
-                              backgroundColor: `${exp.color}1A`,
-                              borderColor: `${exp.color}30`,
-                            }}>
-                            {exp.period}
-                          </span>
-                        </div>
-
-                        <div className="flex items-start gap-4 mb-4">
-                          {exp.logo && (
-                            <div className="relative flex-shrink-0">
-                              <img
-                                src={exp.logo}
-                                alt={`${exp.company} Logo`}
-                                className="w-12 h-12 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                              />
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-xl font-bold text-github-text mb-1 group-hover:text-white transition-colors duration-300">
-                              {exp.title}
-                            </h3>
-                            <p
-                              className="text-base font-semibold"
-                              style={{ color: exp.color }}>
-                              {exp.company}
-                            </p>
-                          </div>
-                        </div>
-
-                        {exp.location && (
-                          <p className="text-xs text-github-text-secondary mb-4 flex items-center gap-1.5">
-                            <svg
-                              className="w-3.5 h-3.5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24">
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                              />
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
-                            {exp.location}
-                          </p>
-                        )}
-
-                        <ul className="space-y-2.5 flex-1">
-                          {exp.description.map((item, itemIndex) => (
-                            <li
-                              key={itemIndex}
-                              className="text-sm text-github-text-secondary flex items-start leading-relaxed group-hover:text-github-text transition-colors duration-300">
-                              <span
-                              className="inline-block mr-3 mt-0.5 font-bold flex-shrink-0 text-lg"
-                              style={getGradientStyle(exp.color)}>
-                                ▸
-                              </span>
-                              <span className="flex-1">
-                                {highlightKeywords(
-                                  item,
-                                  EXPERIENCE_KEYWORDS,
-                                  exp.color
-                                )}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Middle row - Timeline line and dots */}
-              <div className="relative flex justify-between items-center z-10 gap-4 mt-8">
-                {/* Horizontal timeline line */}
-                <div className="absolute left-0 right-0 top-1/2 h-1 bg-accent/30 -translate-y-1/2 rounded-full z-0"></div>
-                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-accent/50 -translate-y-1/2 rounded-full z-0 blur-sm"></div>
-
-                {/* Timeline dots */}
-                {experiences.map((exp, index) => (
-                  <div
-                    key={index}
-                    className="flex-1 flex justify-center relative z-20">
-                    <div
-                      className="relative w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 flex items-center justify-center ring-4 ring-github-bg group cursor-pointer"
-                      style={{
-                        backgroundColor: exp.color,
-                      }}>
-                      <div
-                        className="absolute inset-0 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"
-                        style={{
-                          backgroundColor: exp.color,
-                        }}></div>
-                      <div className="relative w-6 h-6 bg-github-bg rounded-full"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Vertical Timeline - Mobile/Tablet View */}
-        <div className="block lg:hidden">
-          <div className="relative">
-            {/* Vertical timeline line */}
-            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-accent/30"></div>
-            <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-accent/50 blur-sm"></div>
-
-            <div className="space-y-8 sm:space-y-12">
-              {[...experiences].reverse().map((exp, index) => (
-                <div
-                  key={index}
-                  className="experience-item opacity-0 relative pl-12 sm:pl-20">
-                  {/* Timeline dot */}
-                  <div className="absolute left-[1.0625rem] sm:left-[2.0625rem] top-0 z-10 -translate-x-1/2">
-                    <div
-                      className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-lg transform transition-all duration-300 flex items-center justify-center group"
-                      style={{
-                        backgroundColor: exp.color,
-                      }}>
-                      <div
-                        className="absolute inset-0 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"
-                        style={{
-                          backgroundColor: exp.color,
-                        }}></div>
-                      <div className="relative w-2.5 h-2.5 sm:w-3 sm:h-3 bg-github-bg rounded-full"></div>
-                    </div>
-                  </div>
-
-                  {/* Card */}
-                  <div className="group relative bg-github-bg-secondary/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-github-border/50 hover:border-github-bg-tertiary overflow-hidden w-full flex flex-col">
-                    {/* Subtle flat overlay */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                      style={{
-                        backgroundColor: exp.color,
-                      }}></div>
-
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="mb-3 sm:mb-4">
-                        <span
-                          className="inline-flex items-center text-[10px] sm:text-xs font-semibold px-3 sm:px-4 py-1.5 sm:py-2 text-github-text border border-github-border/30 rounded-full backdrop-blur-sm"
-                          style={{
-                            backgroundColor: `${exp.color}1A`,
-                            borderColor: `${exp.color}30`,
-                          }}>
-                          {exp.period}
-                        </span>
-                      </div>
-
-                      <div className="flex items-start gap-3 sm:gap-4 mb-3">
-                        {exp.logo && (
-                          <div className="relative flex-shrink-0">
-                            <div className="relative bg-github-bg-tertiary/50 p-1.5 sm:p-2 rounded-lg sm:rounded-xl border border-github-border/30 group-hover:border-github-bg-tertiary transition-colors duration-300">
-                              <img
-                                src={exp.logo}
-                                alt={`${exp.company} Logo`}
-                                className="w-10 h-10 sm:w-12 sm:h-12 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                              />
-                            </div>
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg sm:text-xl font-bold text-github-text mb-0.5 sm:mb-1 group-hover:text-white transition-colors duration-300">
-                            {exp.title}
-                          </h3>
-                          <p
-                            className="text-sm sm:text-lg font-semibold"
-                            style={{ color: exp.color }}>
-                            {exp.company}
-                          </p>
-                        </div>
-                      </div>
-
-                      {exp.location && (
-                        <p className="text-[10px] sm:text-xs text-github-text-secondary mb-3 sm:mb-4 flex items-center gap-1 sm:gap-1.5">
-                          <svg
-                            className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                          </svg>
-                          {exp.location}
-                        </p>
-                      )}
-
-                      <ul className="space-y-2 sm:space-y-2.5 flex-1">
-                        {exp.description.map((item, itemIndex) => (
-                          <li
-                            key={itemIndex}
-                            className="text-xs sm:text-sm text-github-text-secondary flex items-start leading-relaxed sm:leading-relaxed group-hover:text-github-text transition-colors duration-300">
-                            <span
-                              className="inline-block mr-2 sm:mr-3 mt-0.5 font-bold flex-shrink-0 text-base sm:text-lg"
-                              style={getGradientStyle(exp.color)}>
-                              ▸
-                            </span>
-                            <span className="flex-1">
-                              {highlightKeywords(
-                                item,
-                                EXPERIENCE_KEYWORDS,
-                                exp.color
-                              )}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div
+        ref={panelRef}
+        role="tabpanel"
+        className="mt-2 origin-top overflow-hidden will-change-[height,opacity,transform]">
+        <div ref={contentRef}>
+          {visibleTab === "work" ? (
+            <TimelineList companies={workExperience} highlight />
+          ) : (
+            <EducationPanel
+              educationExperience={educationExperience}
+              certifications={certifications}
+            />
+          )}
         </div>
       </div>
     </section>
